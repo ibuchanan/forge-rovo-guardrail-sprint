@@ -1,0 +1,54 @@
+app:
+  id: ari:cloud:ecosystem::app/496a1f34-02f3-48b5-9e2a-1855a72a6f2f
+  runtime:
+    architecture: arm64
+    memoryMB: 256
+    name: nodejs22.x
+modules:
+  rovo:agent:
+    - key: forge-rovo-guardrail-sprint
+      name: Sprint Guardrail Agent
+      description: Assess the quality of a sprint
+      actions:
+        - get-sprint-details
+      conversationStarters:
+        - Assess the quality of this sprint
+      prompt: resource:agent-prompts;agent-instructions.md
+  action:
+    - key: get-sprint-details
+      name: Fetch Sprint details
+      description: Fetch Sprint details including Issues and their Epics
+      actionVerb: GET
+      function: fetchSprintDetails
+      inputs:
+        sprintId:
+          title: Sprint Id
+          description: The ID of the target sprint
+          required: true
+          type: string
+  trigger:
+    - key: trigger-lifecycle
+      events:
+        - avi:forge:installed:app
+        - avi:forge:upgraded:app
+      function: lifecycle-handler
+  webtrigger:
+    - key: dev-trigger
+      function: trigger
+      response:
+        type: dynamic
+  function:
+    - key: fetchSprintDetails
+      handler: index.fetchContentFromSprintEpicsAndIssues
+    - key: trigger
+      handler: index.trigger
+    - key: lifecycle-handler
+      handler: index.lifecycle
+permissions:
+  scopes:
+    - read:sprint:jira-software
+    - read:issue-details:jira
+    - read:jql:jira
+resources:
+  - key: agent-prompts
+    path: prompts

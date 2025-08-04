@@ -1,0 +1,35 @@
+{
+  "name": "forge-rovo-guardrail-sprint",
+  "version": "0.0.0",
+  "description": "a sample app that defines a rovo agent and actions",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "@forge/api": "^6.0.2"
+  },
+  "engines": {
+    "node": "22.15.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
+    "@types/node": "22",
+    "promptfoo": "^0.117.2",
+    "tsx": "4",
+    "typescript": "5",
+    "vitest": "3",
+    "yaml": "2"
+  },
+  "scripts": {
+    "check": "biome check --write",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "changelog": "git cliff",
+    "eval": "promptfoo eval",
+    "view": "promptfoo view",
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "test": "vitest",
+    "actiontypes": "tsx ./scripts/actiontypes.ts && biome format --write"
+  }
+}

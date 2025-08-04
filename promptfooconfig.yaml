@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: 'Getting started'
+prompts:
+  - label: Rovo Agent Simulation
+    raw: |
+      <system>
+      {{ agent_instructions }}
+      </system>
+      <context>
+      {{ agent_context }}
+      </context>
+      <user>
+      {{ user_prompt }}
+      </user>
+
+providers:
+  - google:gemini-2.0-flash-lite
+  - google:gemini-1.5-flash
+
+tests:
+  - file://test/promptfoo-test.yaml
