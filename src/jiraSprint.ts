@@ -28,30 +28,69 @@ export async function fetchContentFromSprintEpicsAndIssues(
   return content;
 }
 
+const NO_PARENT = "NO_PARENT";
+const NULL_EPIC = {
+  id: "0",
+  key: "NONE",
+  self: "https://atlassian.com/",
+  fields: {
+    summary: "No parent epic",
+    status: {
+      name: "None",
+    },
+    priority: {
+      name: "None",
+    },
+    issuetype: {
+      name: "Epic",
+    },
+  },
+};
+
 function formatSprintEpicsAndIssues(
   payload: RequestFormatSprintEpicsAndIssues,
 ): string {
   let doc = `# Sprint: ${payload.sprint.name}\n`;
   doc += `\n${payload.sprint.goal}\n`;
-  const issueTree = new Map<SprintParentIssue, Array<SprintMemberIssue>>();
+  const issueList = new Map<string, SprintMemberIssue | SprintParentIssue>([
+    [NO_PARENT, NULL_EPIC],
+  ]);
+  const issueTree = new Map<string, Array<string>>([[NO_PARENT, []]]);
   payload.sprintIssues.issues.forEach((issue) => {
+    issueList.set(issue.key, issue);
     if (Object.hasOwn(issue.fields, "parent")) {
-      if (!issueTree.has(issue.fields.parent)) {
-        issueTree.set(issue.fields.parent, [issue]);
+      const parent = issue.fields.parent;
+      issueList.set(parent.key, parent);
+      if (!issueTree.has(parent.key)) {
+        issueTree.set(parent.key, [issue.key]);
       } else {
-        issueTree.get(issue.fields.parent)?.push(issue);
+        issueTree.get(parent.key)?.push(issue.key);
       }
+    } else {
+      issueTree.get(NO_PARENT)?.push(issue.key);
     }
   });
-  issueTree.forEach((members, parent) => {
-    doc += `\n## ${parent.fields.issuetype.name}: ${parent.key} ${parent.fields.summary}\n`;
-    members.forEach((member) => {
-      doc += `\n### ${member.fields.issuetype.name}: ${member.key} ${member.fields.summary}\n\n`;
-      doc += `* Assignee: ${member.fields.assignee?.name}\n`;
-      doc += `* Status: ${member.fields.status.name}\n`;
-      doc += `\n${member.fields.description}\n`;
-    });
+  issueTree.forEach((memberKeys, parentKey) => {
+    const parent = issueList.get(parentKey) as SprintParentIssue;
+    if (parent === undefined) {
+      console.error(`${parentKey} not found`);
+    } else {
+      doc += `\n## ${parent.fields.issuetype.name}: ${parent.key} ${parent.fields.summary}\n`;
+      memberKeys.forEach((memberKey) => {
+        const member = issueList.get(memberKey) as SprintMemberIssue;
+        if (member === undefined) {
+          console.error(`${memberKey} not found`);
+        } else {
+          doc += `\n### ${member.fields.issuetype.name}: ${member.key} ${member.fields.summary}\n\n`;
+          doc += `* Assignee: ${member.fields.assignee?.displayName}\n`;
+          doc += `* Status: ${member.fields.status.name}\n`;
+          if (member.fields.description) {
+            doc += `\n${member.fields.description}\n`;
+          }
+        }
+      });
+    }
   });
-  console.debug(`doc: ${doc}`);
+  // console.debug(`doc: ${doc}`);
   return doc;
 }

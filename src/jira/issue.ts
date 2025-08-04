@@ -40,7 +40,7 @@ export interface CardFields {
   summary: string;
   status: NamedObject;
   // updated: ResultDate;
-  assignee?: NamedObject;
+  assignee?: { displayName: string };
   priority?: NamedObject;
 }
 const cardFields = ["issuetype", "summary", "status", "assignee", "priority"];
@@ -90,7 +90,7 @@ function mapResultToIssueCard(input: Issue<CardFields>) {
     status: input.fields.status.name,
     // updated: ResultDate;
     // Might be null assignee
-    assignee: input.fields.assignee?.name,
+    assignee: input.fields.assignee?.displayName,
     // Might be null priority
     priority: input.fields.priority?.name,
   };
