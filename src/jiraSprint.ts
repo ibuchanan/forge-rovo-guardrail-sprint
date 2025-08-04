@@ -46,8 +46,10 @@ function formatSprintEpicsAndIssues(
   issueTree.forEach((members, parent) => {
     doc += `\n## ${parent.fields.issuetype.name}: ${parent.key} ${parent.fields.summary}\n`;
     members.forEach((member) => {
-      doc += `\n### ${member.fields.issuetype.name}: ${member.key} ${member.fields.summary}\n`;
-      doc += `\n${member.fields.description}`;
+      doc += `\n### ${member.fields.issuetype.name}: ${member.key} ${member.fields.summary}\n\n`;
+      doc += `* Assignee: ${member.fields.assignee?.name}\n`;
+      doc += `* Status: ${member.fields.status.name}\n`;
+      doc += `\n${member.fields.description}\n`;
     });
   });
   console.debug(`doc: ${doc}`);
