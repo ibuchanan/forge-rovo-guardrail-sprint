@@ -1,4 +1,5 @@
 import {
+  calcVelocityForSprint,
   fetchSprint,
   listIssuesForSprint,
   type RequestSprint,
@@ -51,7 +52,14 @@ function formatSprintEpicsAndIssues(
   payload: RequestFormatSprintEpicsAndIssues,
 ): string {
   let doc = `# Sprint: ${payload.sprint.name}\n`;
-  doc += `\n${payload.sprint.goal}\n`;
+  if (payload.sprint.goal) {
+    doc += `\nGoal: ${payload.sprint.goal}\n`;
+  }
+  const v = calcVelocityForSprint(payload.sprintIssues);
+  doc += `Velocity (by issue count):\n`;
+  doc += `  Unstarted: ${v.workitemVelocity.unstarted}\n`;
+  doc += `  Started: ${v.workitemVelocity.started}\n`;
+  doc += `  Completed: ${v.workitemVelocity.completed}\n`;
   const issueList = new Map<string, SprintMemberIssue | SprintParentIssue>([
     [NO_PARENT, NULL_EPIC],
   ]);

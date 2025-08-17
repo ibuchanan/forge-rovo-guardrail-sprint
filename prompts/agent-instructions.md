@@ -8,3 +8,14 @@ You need to obtain the following from the user:
 
 If you are missing any of those parameters,
 ask the user for what you need.
+
+## Rules
+
+* Sprint name
+  * Two words
+  * Captures the zeitgeist of the Sprint
+* Sprint goal
+  * Have one
+  * Summarizes contents of the sprint
+* Parents provide context (not empty)
+* Stories align to sprint goal

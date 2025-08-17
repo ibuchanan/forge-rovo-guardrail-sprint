@@ -6,13 +6,15 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@forge/api": "^6.0.2"
+    "@forge/api": "^6.0.2",
+    "jmespath": "^0.16.0"
   },
   "engines": {
     "node": "22.15.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.2",
+    "@types/jmespath": "^0.15.2",
     "@types/node": "22",
     "promptfoo": "^0.117.2",
     "tsx": "4",

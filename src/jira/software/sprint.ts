@@ -1,4 +1,5 @@
 import api, { route } from "@forge/api";
+import * as jmespath from "jmespath";
 import type { Issue, ParentedCardFields, ParentFields } from "../issue";
 import type { PagedResponse } from "./api";
 
@@ -80,6 +81,9 @@ export async function listIssuesForSprint(
     if (response.ok) {
       console.debug(`Success: Sprint Id "${payload.sprintId}"`);
       const responseJson = (await response.json()) as SprintIssuesResultPage;
+      if (responseJson.startAt + responseJson.maxResults < responseJson.total) {
+        // TODO: then iterate to get more pages
+      }
       console.debug(`Sprint Issues: total=${responseJson.total}`);
       return responseJson;
     }
@@ -90,6 +94,46 @@ export async function listIssuesForSprint(
     console.error(error);
     throw new Error(`Failed for Sprint Id "${payload.sprintId}"\n`);
   }
+}
+
+enum StatusCategory {
+  unstarted = "new",
+  started = "indeterminate",
+  completed = "done",
+}
+
+export function calcVelocityForSprint(sprint: SprintIssuesResultPage) {
+  return {
+    workitemVelocity: {
+      unstarted: jmespath.search(
+        sprint,
+        `issues[?fields.statusCategory.key=='${StatusCategory.unstarted}'].key | length(@)`,
+      ),
+      started: jmespath.search(
+        sprint,
+        `issues[?fields.statusCategory.key=='${StatusCategory.started}'].key | length(@)`,
+      ),
+      completed: jmespath.search(
+        sprint,
+        `issues[?fields.statusCategory.key=='${StatusCategory.completed}'].key | length(@)`,
+      ),
+    },
+    // TODO: Ask API which field is for estimates
+    storypointVelocity: {
+      unstarted: jmespath.search(
+        sprint,
+        `issues[?fields.statusCategory.key=='${StatusCategory.unstarted}'].fields.customfield_10031 | sum(@)`,
+      ),
+      started: jmespath.search(
+        sprint,
+        `issues[?fields.statusCategory.key=='${StatusCategory.started}'].fields.customfield_10031 | sum(@)`,
+      ),
+      completed: jmespath.search(
+        sprint,
+        `issues[?fields.statusCategory.key=='${StatusCategory.completed}'].fields.customfield_10031 | sum(@)`,
+      ),
+    },
+  };
 }
 
 export type SprintMemberIssue = Issue<ParentedCardFields>;

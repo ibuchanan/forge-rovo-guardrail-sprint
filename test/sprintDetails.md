@@ -1,41 +1,43 @@
-# Sprint: MOBL Sprint 1
+# Sprint: Platform Security
 
 ## Epic: MOBL-1 iOS Platform Update
 
-### Story: MOBL-28 Investigate scalability issue when user volume exceeds 20k
+### Story: MOBL-28 Spike: Does site load in <1s when user volume exceeds 20k?
 
-* Assignee: undefined
+* Assignee: Alana Grant
 * Status: To Do
 
-As a Database we need to handle over 20k concurrent requests so response time to the mobile app is fast for customers
+As a mobile app user, I want the site to load in less than 1 second even when there are more than 20,000 concurrent users, so that I have a fast and responsive experience regardless of user volume.
+
+This is a 2 day spike to make sure the site loads <1s when there are more than 20k users. The customer MediHalon is expected to reach 20k users before the end of this year.
 
 ### Story: MOBL-8 Password security update
 
-* Assignee: undefined
+* Assignee: Lisbeth Salander
 * Status: To Do
 
-null
+As a user, I want to receive a notification if my password is found in a known data breach, so that I can update it immediately and keep my account secure.
 
-### Story: MOBL-20 Change login related support documentation
+### Task: MOBL-20 Change login related support documentation
 
-* Assignee: undefined
+* Assignee: Doc Holiday
 * Status: To Do
 
-Update and revise the login related support documentation to ensure clarity, accuracy, and alignment with current processes. This includes reviewing existing content, identifying gaps, and implementing necessary changes to enhance user understanding and support efficiency.
+Revise the login related support documentation to ensure clarity, accuracy, and alignment with current processes. This includes reviewing existing content, identifying gaps, and implementing necessary changes to enhance user understanding and support efficiency.
 
-### Story: MOBL-11 Fix typo on Contact Us page
+### Bug: MOBL-11 Typo on Contact Us page
 
-* Assignee: undefined
+* Assignee: Doc Holiday
 * Status: In Progress
 
-null
+There is a typo on the Contact Us page where the word 'adress' is used instead of the correct spelling 'address'; this should be corrected to improve professionalism and user trust.
 
-### Story: MOBL-15 Enable fingerprint identity to be used on mobile
+### Story: MOBL-15 Fingerprint identity
 
-* Assignee: undefined
+* Assignee: Lisbeth Salander
 * Status: Testing
 
-null
+As a mobile app user, I want to use fingerprint authentication to log in, so that I can access my account quickly and securely without entering a password.
 
 ### Story: MOBL-17 Add security to mobile devices
 
