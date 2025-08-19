@@ -5,6 +5,8 @@ import type { PagedResponse } from "./api";
 
 export interface RequestSprint {
   sprintId: number;
+  // TODO: derive sprint from the board that comes in the context
+  // context: any;
 }
 
 export async function fetchSprint(

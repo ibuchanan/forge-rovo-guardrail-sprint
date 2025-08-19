@@ -1,0 +1,32 @@
+{
+  "jira": {
+    "boardId": "1",
+    "url": "https://one-atlas-iire.atlassian.net/jira/software/c/projects/PLAT/boards/1",
+    "resourceType": "board",
+    "jiraContexts": [
+      {
+        "url": "https://one-atlas-iire.atlassian.net/browse/PLAT-33256",
+        "resourceType": "issue",
+        "issueKey": "PLAT-33256",
+        "issueId": "64095",
+        "issueType": "Story",
+        "issueTypeId": "10022",
+        "projectName": "Platform Development",
+        "projectKey": "PLAT"
+      },
+      {
+        "url": "https://one-atlas-iire.atlassian.net/browse/PLAT-33255",
+        "resourceType": "issue",
+        "issueKey": "PLAT-33255",
+        "issueId": "64094",
+        "issueType": "Story",
+        "issueTypeId": "10022",
+        "projectName": "Platform Development",
+        "projectKey": "PLAT"
+      }
+    ]
+  },
+  "cloudId": "639c4c97-0caf-459b-bc27-da6250725163",
+  "moduleKey": "get-sprint-details",
+  "userAccess": { "enabled": false, "hasAccess": true }
+}

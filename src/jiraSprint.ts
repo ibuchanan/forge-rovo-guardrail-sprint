@@ -18,6 +18,7 @@ interface RequestFormatSprintEpicsAndIssues {
 export async function fetchContentFromSprintEpicsAndIssues(
   payload: RequestSprint,
 ): Promise<string> {
+  // console.debug(`context: ${JSON.stringify(payload.context)}`);
   const sprint = await fetchSprint(payload);
   // console.debug(`sprint: ${JSON.stringify(sprint)}`);
   const sprintIssues = await listIssuesForSprint(payload);
