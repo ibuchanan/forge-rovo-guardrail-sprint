@@ -7,7 +7,8 @@
   "private": true,
   "dependencies": {
     "@forge/api": "^6.0.2",
-    "jmespath": "^0.16.0"
+    "jmespath": "^0.16.0",
+    "yaml": "^2.8.0"
   },
   "engines": {
     "node": "22.15.1"
@@ -19,8 +20,7 @@
     "promptfoo": "^0.117.2",
     "tsx": "4",
     "typescript": "5",
-    "vitest": "3",
-    "yaml": "2"
+    "vitest": "3"
   },
   "scripts": {
     "check": "biome check --write",

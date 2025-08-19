@@ -102,8 +102,30 @@ enum StatusCategory {
   completed = "done",
 }
 
-export function calcVelocityForSprint(sprint: SprintIssuesResultPage) {
+export function calcMetadataForSprint(sprint: SprintIssuesResultPage) {
+  // TODO: Ask API which field is for estimates
+  const ESTIMATE_FIELD = "customfield_10031";
   return {
+    assignees: {
+      count: new Set(
+        jmespath.search(sprint, "issues[].fields.assignee.accountId"),
+      ).size,
+      unique: new Set(
+        jmespath.search(sprint, "issues[].fields.assignee.displayName"),
+      ),
+    },
+    empties: {
+      assignee: jmespath.search(sprint, "issues[?fields.assignee==`null`].key"),
+      description: jmespath.search(
+        sprint,
+        "issues[?fields.description==`null`].key",
+      ),
+      estimate: jmespath.search(
+        sprint,
+        `issues[?fields.${ESTIMATE_FIELD}==\`null\`].key`,
+      ),
+      parent: jmespath.search(sprint, "issues[?fields.parent==`null`].key"),
+    },
     workitemVelocity: {
       unstarted: jmespath.search(
         sprint,
@@ -118,19 +140,18 @@ export function calcVelocityForSprint(sprint: SprintIssuesResultPage) {
         `issues[?fields.statusCategory.key=='${StatusCategory.completed}'].key | length(@)`,
       ),
     },
-    // TODO: Ask API which field is for estimates
     storypointVelocity: {
       unstarted: jmespath.search(
         sprint,
-        `issues[?fields.statusCategory.key=='${StatusCategory.unstarted}'].fields.customfield_10031 | sum(@)`,
+        `issues[?fields.statusCategory.key=='${StatusCategory.unstarted}'].fields.${ESTIMATE_FIELD} | sum(@)`,
       ),
       started: jmespath.search(
         sprint,
-        `issues[?fields.statusCategory.key=='${StatusCategory.started}'].fields.customfield_10031 | sum(@)`,
+        `issues[?fields.statusCategory.key=='${StatusCategory.started}'].fields.${ESTIMATE_FIELD} | sum(@)`,
       ),
       completed: jmespath.search(
         sprint,
-        `issues[?fields.statusCategory.key=='${StatusCategory.completed}'].fields.customfield_10031 | sum(@)`,
+        `issues[?fields.statusCategory.key=='${StatusCategory.completed}'].fields.${ESTIMATE_FIELD} | sum(@)`,
       ),
     },
   };

@@ -17,5 +17,12 @@ ask the user for what you need.
 * Sprint goal
   * Have one
   * Summarizes contents of the sprint
-* Parents provide context (not empty)
+* Stories are ready
+  * Assignees show ownership (not empty)
+  * Descriptions capture the intent (not empty)
+  * Estimates show preparation (not empty)
+  * Parent epics provide context (not empty)
 * Stories align to sprint goal
+* Workflow status
+  * Stop starting: each person doesn't have more than a few _started_ workitems
+  * Focus on finishing: try to move workitems to _completed_ before starting _new_ workitems

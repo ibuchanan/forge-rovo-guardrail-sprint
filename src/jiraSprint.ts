@@ -1,5 +1,6 @@
+import YAML from "yaml";
 import {
-  calcVelocityForSprint,
+  calcMetadataForSprint,
   fetchSprint,
   listIssuesForSprint,
   type RequestSprint,
@@ -55,11 +56,9 @@ function formatSprintEpicsAndIssues(
   if (payload.sprint.goal) {
     doc += `\nGoal: ${payload.sprint.goal}\n`;
   }
-  const v = calcVelocityForSprint(payload.sprintIssues);
-  doc += `Velocity (by issue count):\n`;
-  doc += `  Unstarted: ${v.workitemVelocity.unstarted}\n`;
-  doc += `  Started: ${v.workitemVelocity.started}\n`;
-  doc += `  Completed: ${v.workitemVelocity.completed}\n`;
+  const sprintMetadata = calcMetadataForSprint(payload.sprintIssues);
+  doc += YAML.stringify(sprintMetadata);
+  // console.debug(`doc: ${doc}`);
   const issueList = new Map<string, SprintMemberIssue | SprintParentIssue>([
     [NO_PARENT, NULL_EPIC],
   ]);
