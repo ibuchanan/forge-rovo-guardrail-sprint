@@ -1,4 +1,11 @@
 import YAML from "yaml";
+import type { FetchActiveSprintDetailsPayload } from "./actionpayload";
+import {
+  type BoardResponse,
+  fetchBoard,
+  listActiveSprintsForBoard,
+  pickBoard,
+} from "./jira/software/board";
 import {
   calcMetadataForSprint,
   fetchSprint,
@@ -11,19 +18,33 @@ import {
 } from "./jira/software/sprint";
 
 interface RequestFormatSprintEpicsAndIssues {
+  board: BoardResponse;
   sprint: SprintResponse;
   sprintIssues: SprintIssuesResultPage;
 }
 
-export async function fetchContentFromSprintEpicsAndIssues(
-  payload: RequestSprint,
+export async function fetchBoardSprintContent(
+  payload: FetchActiveSprintDetailsPayload,
 ): Promise<string> {
-  // console.debug(`context: ${JSON.stringify(payload.context)}`);
-  const sprint = await fetchSprint(payload);
+  const boardId = pickBoard(payload);
+  if (typeof boardId === "string") {
+    return boardId;
+  }
+  const board = await fetchBoard(boardId);
+  const activeSprints = await listActiveSprintsForBoard(boardId);
+  // Assume there is only 1 active sprint per board
+  if (activeSprints.values[0] === undefined) {
+    return `Could not find any active sprints for Board Id ${boardId.boardId}`;
+  }
+  const sprintId: RequestSprint = {
+    sprintId: BigInt(activeSprints.values[0].id),
+  };
+  const sprint = await fetchSprint(sprintId);
   // console.debug(`sprint: ${JSON.stringify(sprint)}`);
-  const sprintIssues = await listIssuesForSprint(payload);
+  const sprintIssues = await listIssuesForSprint(sprintId);
   // console.debug(`sprintIssues: ${JSON.stringify(sprintIssues)}`);
   const dataToFormat = {
+    board: board,
     sprint: sprint,
     sprintIssues: sprintIssues,
   } as RequestFormatSprintEpicsAndIssues;
@@ -53,7 +74,8 @@ const NULL_EPIC = {
 function formatSprintEpicsAndIssues(
   payload: RequestFormatSprintEpicsAndIssues,
 ): string {
-  let doc = `# Sprint: ${payload.sprint.name}\n`;
+  let doc = `# Board: ${payload.board.name} (${payload.board.type})\n`;
+  doc += `\n## Sprint: ${payload.sprint.name}\n`;
   if (payload.sprint.goal) {
     doc += `\nGoal: ${payload.sprint.goal}\n`;
   }
@@ -83,13 +105,13 @@ function formatSprintEpicsAndIssues(
     if (parent === undefined) {
       console.error(`${parentKey} not found`);
     } else {
-      doc += `\n## ${parent.fields.issuetype.name}: ${parent.key} ${parent.fields.summary}\n`;
+      doc += `\n### ${parent.fields.issuetype.name}: ${parent.key} ${parent.fields.summary}\n`;
       memberKeys.forEach((memberKey) => {
         const member = issueList.get(memberKey) as SprintMemberIssue;
         if (member === undefined) {
           console.error(`${memberKey} not found`);
         } else {
-          doc += `\n### ${member.fields.issuetype.name}: ${member.key} ${member.fields.summary}\n\n`;
+          doc += `\n#### ${member.fields.issuetype.name}: ${member.key} ${member.fields.summary}\n\n`;
           doc += `* Assignee: ${member.fields.assignee?.displayName}\n`;
           doc += `* Status: ${member.fields.status.name}\n`;
           if (member.fields.description) {

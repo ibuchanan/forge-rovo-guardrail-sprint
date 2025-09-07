@@ -4,9 +4,7 @@ import type { Issue, ParentedCardFields, ParentFields } from "../issue";
 import type { PagedResponse } from "./api";
 
 export interface RequestSprint {
-  sprintId: number;
-  // TODO: derive sprint from the board that comes in the context
-  // context: any;
+  sprintId: bigint;
 }
 
 export async function fetchSprint(
@@ -17,7 +15,7 @@ export async function fetchSprint(
     const sprintId = payload.sprintId;
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${sprintId}`, {
+      .requestJira(route`/rest/agile/1.0/sprint/${sprintId.toString()}`, {
         headers: {
           Accept: "application/json",
         },
@@ -73,7 +71,7 @@ export async function listIssuesForSprint(
     const sprintId = payload.sprintId;
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${sprintId}/issue`, {
+      .requestJira(route`/rest/agile/1.0/sprint/${sprintId.toString()}/issue`, {
         headers: {
           Accept: "application/json",
         },
@@ -98,7 +96,7 @@ export async function listIssuesForSprint(
   }
 }
 
-enum StatusCategory {
+export enum StatusCategory {
   unstarted = "new",
   started = "indeterminate",
   completed = "done",

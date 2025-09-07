@@ -1,6 +1,6 @@
 import type { EventContext } from "../forge/events";
 
-interface RovoProductDetail {
+export interface RovoProductDetail {
   url: string;
   resourceType: string;
 }
@@ -25,7 +25,7 @@ interface RovoProductDetail {
   }
 }
 */
-interface JiraIssueDetail extends RovoProductDetail {
+export interface JiraIssueDetail extends RovoProductDetail {
   issueKey: string;
   issueId: string;
   issueType: string;

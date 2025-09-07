@@ -16,16 +16,16 @@ modules:
       prompt: resource:agent-prompts;agent-instructions.md
   action:
     - key: get-sprint-details
-      name: Fetch Sprint details
-      description: Fetch Sprint details including Issues and their Epics
+      name: Fetch active sprint details
+      description: Fetch active sprint details for a board including issues and their epics
       actionVerb: GET
-      function: fetchSprintDetails
+      function: fetchActiveSprintDetail
       inputs:
-        sprintId:
-          title: Sprint Id
-          description: The ID of the target sprint
-          required: true
-          type: string
+        boardId:
+          title: Board Id
+          description: The ID of the target board with an active sprint
+          required: false
+          type: integer
   trigger:
     - key: trigger-lifecycle
       events:
@@ -38,14 +38,15 @@ modules:
       response:
         type: dynamic
   function:
-    - key: fetchSprintDetails
-      handler: index.fetchContentFromSprintEpicsAndIssues
+    - key: fetchActiveSprintDetail
+      handler: index.fetchBoardSprintContent
     - key: trigger
       handler: index.trigger
     - key: lifecycle-handler
       handler: index.lifecycle
 permissions:
   scopes:
+    - read:board-scope:jira-software
     - read:sprint:jira-software
     - read:issue-details:jira
     - read:jql:jira
