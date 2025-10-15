@@ -113,7 +113,7 @@ export interface BoardResponse {
 }
 
 function getApiWithAuth(payload: RequestBoard) {
-  console.debug(`Auth for Request: ${JSON.stringify(payload)}`);
+  console.debug(`Auth for Request: Board Id ${payload.boardId}`);
   if (payload.context !== undefined) {
     console.debug(`Auth for Request: providing asUser()`);
     return api.asUser();

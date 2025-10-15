@@ -1,20 +1,9 @@
-interface NamedObject {
-  name: string;
-}
-
-interface ExpandableResponse {
-  expand?: string;
-}
-
-interface ArrayedResponse {
-  total: number;
-}
-
-interface PagedResponse extends ArrayedResponse {
-  startAt: number;
-  maxResults: number;
-  isLast?: boolean;
-}
+import {
+  ArrayedResponse,
+  type ExpandableResponse,
+  type NamedObject,
+  type PagedResponse,
+} from "./api";
 
 interface FindProjectsPayload {
   query?: string;
@@ -100,14 +89,4 @@ function mapResultToIssueCard(input: Issue<CardFields>) {
 function mapResultToIssueContent(input: Issue<ContentFields>) {
   // console.debug(`Issue: ${input.id} ${input.self}`);
   return `<issue><h2>${input.key} ${input.fields.summary}</h2>\n${input.renderedFields?.description}</issue>`;
-}
-
-function sanitizeKey(key: string) {
-  // Strip spaces
-  return key.replace(/\s+/g, "").toUpperCase();
-}
-
-function sanitizeTextQuery(query: string) {
-  // Strip characters that aren't word or space characters
-  return query.replace(/[^\w\s]+/g, "").toLowerCase();
 }

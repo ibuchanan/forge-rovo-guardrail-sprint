@@ -63,8 +63,10 @@ permissions:
   scopes:
     - read:board-scope:jira-software
     - read:sprint:jira-software
+    - write:sprint:jira-software
     - read:issue-details:jira
     - read:jql:jira
+    - read:jira-user
     - read:chat:rovo
 resources:
   - key: agent-prompts

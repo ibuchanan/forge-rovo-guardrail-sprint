@@ -4,9 +4,9 @@ Using ../scripts/actiontypes.ts
 Payload interfaces are kept in sync with Actions & Inputs defined in manifest.yml
 */
 import type { CommonEvent } from "./forge/events";
-import type { RovoContext } from "./rovo/action";
 // Need to override default RovoContext to grab board, if currently open in UI
 import type { RovoBoardContext } from "./jira/software/board";
+import type { RovoContext } from "./rovo/action";
 export interface FetchActiveSprintDetailPayload extends CommonEvent {
   boardId?: bigint;
   context: RovoBoardContext;

@@ -19,10 +19,9 @@ export async function fetchSprint(
 ): Promise<SprintResponse> {
   console.debug(`Request: Sprint Id "${payload.sprintId}"`);
   try {
-    const sprintId = payload.sprintId;
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${sprintId.toString()}`, {
+      .requestJira(route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}`, {
         headers: {
           Accept: "application/json",
         },
@@ -72,17 +71,20 @@ export interface SprintResponse {
 
 export async function listIssuesForSprint(
   payload: RequestSprint,
+  jql: string = "",
 ): Promise<SprintIssuesResultPage> {
   console.debug(`Request: Sprint Id "${payload.sprintId}"`);
   try {
-    const sprintId = payload.sprintId;
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${sprintId.toString()}/issue`, {
-        headers: {
-          Accept: "application/json",
+      .requestJira(
+        route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}/issue?jql=${jql}`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
         },
-      });
+      );
     console.debug(`Response: ${response.status} ${response.statusText}`);
     // console.debug(JSON.stringify(await response.json()));
     if (response.ok) {
@@ -103,10 +105,48 @@ export async function listIssuesForSprint(
   }
 }
 
+export async function moveIssuesToSprint(
+  payload: RequestSprint,
+  issues: Array<string>,
+) {
+  console.debug(
+    `Update: Sprint Id "${payload.sprintId}" for ${JSON.stringify(issues)}`,
+  );
+  const _me = await myself();
+  try {
+    const body = { issues: issues };
+    const response = await api
+      .asUser()
+      .requestJira(route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}/issue`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    console.debug(`Response: ${response.status} ${response.statusText}`);
+    // console.debug(JSON.stringify(await response.json()));
+    if (response.ok) {
+      console.debug(`Success: Sprint Id "${payload.sprintId}"`);
+      return;
+    }
+    // TODO: check status codes and throw errors
+    console.error(`Failed: Sprint Id "${payload.sprintId}"`);
+    throw new Error(`Failed for Sprint Id "${payload.sprintId}"\n`);
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Failed for Sprint Id "${payload.sprintId}"\n`);
+  }
+}
+
 export enum StatusCategory {
   unstarted = "new",
   started = "indeterminate",
   completed = "done",
+}
+
+export function listIssueKeysForSprint(sprint: SprintIssuesResultPage) {
+  return jmespath.search(sprint, "issues[].key") as Array<string>;
 }
 
 export function calcMetadataForSprint(sprint: SprintIssuesResultPage) {
@@ -182,14 +222,12 @@ export async function updateSprint(
   body: SprintBody,
 ): Promise<SprintResponse> {
   console.debug(`Update: Sprint Id "${payload.sprintId}"`);
-  console.debug(`RequestSprint: ${JSON.stringify(payload)}`);
   console.debug(`SprintBody: ${JSON.stringify(body)}`);
   const _me = await myself();
   try {
-    const sprintId = payload.sprintId;
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${sprintId.toString()}`, {
+      .requestJira(route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -201,7 +239,7 @@ export async function updateSprint(
     // console.debug(JSON.stringify(await response.json()));
     if (response.ok) {
       console.debug(`Success: Sprint Id "${payload.sprintId}"`);
-      const responseJson = (await response.json()) as SprintResponse;
+      const responseJson = await response.json() as SprintResponse;
       console.debug(`Sprint: ${responseJson.id} ${responseJson.self}`);
       return responseJson;
     }

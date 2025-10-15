@@ -1,0 +1,515 @@
+{
+  "boardId": 2,
+  "context": {
+    "jira": {
+      "boardId": "2",
+      "url": "https://one-atlas-iire.atlassian.net/jira/software/c/projects/MOBL/boards/2/backlog",
+      "resourceType": "backlog",
+      "jiraContexts": [
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-28",
+          "resourceType": "issue",
+          "issueKey": "MOBL-28",
+          "issueId": "10180",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-32",
+          "resourceType": "issue",
+          "issueKey": "MOBL-32",
+          "issueId": "12188",
+          "issueType": "Bug",
+          "issueTypeId": "10005",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-8",
+          "resourceType": "issue",
+          "issueKey": "MOBL-8",
+          "issueId": "10151",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-20",
+          "resourceType": "issue",
+          "issueKey": "MOBL-20",
+          "issueId": "10172",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-10",
+          "resourceType": "issue",
+          "issueKey": "MOBL-10",
+          "issueId": "10162",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-11",
+          "resourceType": "issue",
+          "issueKey": "MOBL-11",
+          "issueId": "10163",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-12",
+          "resourceType": "issue",
+          "issueKey": "MOBL-12",
+          "issueId": "10164",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-13",
+          "resourceType": "issue",
+          "issueKey": "MOBL-13",
+          "issueId": "10165",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-14",
+          "resourceType": "issue",
+          "issueKey": "MOBL-14",
+          "issueId": "10166",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-15",
+          "resourceType": "issue",
+          "issueKey": "MOBL-15",
+          "issueId": "10167",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-16",
+          "resourceType": "issue",
+          "issueKey": "MOBL-16",
+          "issueId": "10168",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-17",
+          "resourceType": "issue",
+          "issueKey": "MOBL-17",
+          "issueId": "10169",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-18",
+          "resourceType": "issue",
+          "issueKey": "MOBL-18",
+          "issueId": "10170",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-27",
+          "resourceType": "issue",
+          "issueKey": "MOBL-27",
+          "issueId": "10179",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-19",
+          "resourceType": "issue",
+          "issueKey": "MOBL-19",
+          "issueId": "10171",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-9",
+          "resourceType": "issue",
+          "issueKey": "MOBL-9",
+          "issueId": "10161",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-21",
+          "resourceType": "issue",
+          "issueKey": "MOBL-21",
+          "issueId": "10173",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-22",
+          "resourceType": "issue",
+          "issueKey": "MOBL-22",
+          "issueId": "10174",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-26",
+          "resourceType": "issue",
+          "issueKey": "MOBL-26",
+          "issueId": "10178",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-24",
+          "resourceType": "issue",
+          "issueKey": "MOBL-24",
+          "issueId": "10176",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-38",
+          "resourceType": "issue",
+          "issueKey": "MOBL-38",
+          "issueId": "36294",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-23",
+          "resourceType": "issue",
+          "issueKey": "MOBL-23",
+          "issueId": "10175",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-25",
+          "resourceType": "issue",
+          "issueKey": "MOBL-25",
+          "issueId": "10177",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-29",
+          "resourceType": "issue",
+          "issueKey": "MOBL-29",
+          "issueId": "10438",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-30",
+          "resourceType": "issue",
+          "issueKey": "MOBL-30",
+          "issueId": "12043",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-36",
+          "resourceType": "issue",
+          "issueKey": "MOBL-36",
+          "issueId": "32634",
+          "issueType": "Bug",
+          "issueTypeId": "10005",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-37",
+          "resourceType": "issue",
+          "issueKey": "MOBL-37",
+          "issueId": "35828",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-39",
+          "resourceType": "issue",
+          "issueKey": "MOBL-39",
+          "issueId": "47706",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-40",
+          "resourceType": "issue",
+          "issueKey": "MOBL-40",
+          "issueId": "59148",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-51",
+          "resourceType": "issue",
+          "issueKey": "MOBL-51",
+          "issueId": "65633",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-41",
+          "resourceType": "issue",
+          "issueKey": "MOBL-41",
+          "issueId": "59149",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-42",
+          "resourceType": "issue",
+          "issueKey": "MOBL-42",
+          "issueId": "59150",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-52",
+          "resourceType": "issue",
+          "issueKey": "MOBL-52",
+          "issueId": "65635",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-78",
+          "resourceType": "issue",
+          "issueKey": "MOBL-78",
+          "issueId": "65765",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-43",
+          "resourceType": "issue",
+          "issueKey": "MOBL-43",
+          "issueId": "59151",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-44",
+          "resourceType": "issue",
+          "issueKey": "MOBL-44",
+          "issueId": "59154",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-45",
+          "resourceType": "issue",
+          "issueKey": "MOBL-45",
+          "issueId": "59155",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-46",
+          "resourceType": "issue",
+          "issueKey": "MOBL-46",
+          "issueId": "59156",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-47",
+          "resourceType": "issue",
+          "issueKey": "MOBL-47",
+          "issueId": "59157",
+          "issueType": "Story",
+          "issueTypeId": "10022",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-48",
+          "resourceType": "issue",
+          "issueKey": "MOBL-48",
+          "issueId": "59158",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-49",
+          "resourceType": "issue",
+          "issueKey": "MOBL-49",
+          "issueId": "59159",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-50",
+          "resourceType": "issue",
+          "issueKey": "MOBL-50",
+          "issueId": "59160",
+          "issueType": "Sub-task",
+          "issueTypeId": "10003",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-56",
+          "resourceType": "issue",
+          "issueKey": "MOBL-56",
+          "issueId": "65670",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-59",
+          "resourceType": "issue",
+          "issueKey": "MOBL-59",
+          "issueId": "65674",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-61",
+          "resourceType": "issue",
+          "issueKey": "MOBL-61",
+          "issueId": "65679",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-69",
+          "resourceType": "issue",
+          "issueKey": "MOBL-69",
+          "issueId": "65712",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-75",
+          "resourceType": "issue",
+          "issueKey": "MOBL-75",
+          "issueId": "65741",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-76",
+          "resourceType": "issue",
+          "issueKey": "MOBL-76",
+          "issueId": "65743",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-77",
+          "resourceType": "issue",
+          "issueKey": "MOBL-77",
+          "issueId": "65745",
+          "issueType": "Task",
+          "issueTypeId": "10002",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        },
+        {
+          "url": "https://one-atlas-iire.atlassian.net/browse/MOBL-79",
+          "resourceType": "issue",
+          "issueKey": "MOBL-79",
+          "issueId": "65766",
+          "issueType": "Bug",
+          "issueTypeId": "10005",
+          "projectName": "Mobile Dev",
+          "projectKey": "MOBL"
+        }
+      ]
+    },
+    "cloudId": "639c4c97-0caf-459b-bc27-da6250725163",
+    "moduleKey": "roll-sprint",
+    "userAccess": { "enabled": false, "hasAccess": true }
+  }
+}

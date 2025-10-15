@@ -7,7 +7,10 @@ import {
   type Response,
   type WebtriggerEvent,
 } from "./forge/trigger";
-import { listFutureSprintsForBoard, RequestBoard } from "./jira/software/board";
+import {
+  listFutureSprintsForBoard,
+  type RequestBoard,
+} from "./jira/software/board";
 
 export async function trigger(req: WebtriggerEvent): Promise<Response> {
   console.debug(

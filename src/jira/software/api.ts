@@ -1,4 +1,5 @@
 /*
+https://developer.atlassian.com/cloud/jira/software/rest/intro/#pagination
 {
     "startAt" : 0,
     "maxResults" : 10,
@@ -10,7 +11,6 @@
     ]
 }
 */
-
 export interface PagedResponse {
   startAt: number;
   maxResults: number;

@@ -3,13 +3,9 @@ import type { CommonEvent } from "./events";
 export type Headers = { [key: string]: string[] };
 export type Parameters = { [key: string]: string[] };
 
-export interface FunctionCall {
-  functionKey: string;
-}
-
 export interface WebtriggerEvent extends CommonEvent {
   method: string;
-  call: FunctionCall;
+  call: { functionKey: string };
   headers: Headers;
   queryParameters: Parameters;
   body: string;

@@ -5,17 +5,13 @@ export interface LifecycleEvent extends UniquelyIdentifiedObject, CommonEvent {
   upgraderAccountId?: string;
 }
 
-export interface AppInstallationAri {
-  installationId: string;
-}
-
 export interface AppInstallationContext {
   cloudId: string;
   workspaceId: string;
 }
 
 export interface AppInstallation {
-  ari: AppInstallationAri;
+  ari: { installationId: string };
   contexts: ReadonlyArray<AppInstallationContext>;
 }
 

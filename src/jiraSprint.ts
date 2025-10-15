@@ -14,7 +14,9 @@ import {
   calcMetadataForSprint,
   closeSprint,
   fetchSprint,
+  listIssueKeysForSprint,
   listIssuesForSprint,
+  moveIssuesToSprint,
   type RequestSprint,
   type SprintIssuesResultPage,
   type SprintMemberIssue,
@@ -63,6 +65,8 @@ export async function rollCurrentToNextSprint(
 ): Promise<string> {
   const boardId = pickBoard(payload);
   if (typeof boardId === "string") {
+    // When pickBoard gives us a string,
+    // there was an error so exit
     return boardId;
   }
   const board = await fetchBoard(boardId);
@@ -72,7 +76,7 @@ export async function rollCurrentToNextSprint(
   if (activeSprints.values[0] === undefined) {
     return `Could not find any active sprints for Board Id ${boardId.boardId}`;
   }
-  const sprintToClose: RequestSprint = {
+  const lastSprint: RequestSprint = {
     sprintId: BigInt(activeSprints.values[0].id),
   };
 
@@ -89,7 +93,13 @@ export async function rollCurrentToNextSprint(
   };
 
   // TODO: Move open work items to next sprint, before closing.
-  const _closedSprint = await closeSprint(sprintToClose);
+  const rollingIssues = listIssueKeysForSprint(
+    await listIssuesForSprint(lastSprint, "statusCategory != Done"),
+  );
+  // console.debug(`rollingIssues: ${JSON.stringify(rollingIssues)}`);
+  await moveIssuesToSprint(nextSprint, rollingIssues);
+
+  const _closedSprint = await closeSprint(lastSprint);
   // TODO: handle case where future sprint has no work items
   const sprint = await startSprint(nextSprint);
   // console.debug(`sprint: ${JSON.stringify(sprint)}`);
