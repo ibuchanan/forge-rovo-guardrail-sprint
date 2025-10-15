@@ -1,9 +1,9 @@
 import api, { route } from "@forge/api";
-import type { FetchActiveSprintDetailsPayload } from "../../actionpayload";
+import type { FetchActiveSprintDetailPayload } from "../../actionpayload";
 import type { EventContext } from "../../forge/events";
 import type { JiraIssueDetail, RovoProductDetail } from "../../rovo/action";
 import type { PagedResponse } from "./api";
-import type { SprintResponse } from "./sprint";
+import { type SprintResponse, SprintStates } from "./sprint";
 
 /*
 "boardId": "1",
@@ -21,18 +21,20 @@ export interface RovoBoardContext extends EventContext {
 }
 
 export function pickBoard(
-  payload: FetchActiveSprintDetailsPayload,
+  payload: FetchActiveSprintDetailPayload,
 ): RequestBoard | string {
   console.debug(`Request: Explicit Board Id "${payload.boardId}"`);
   console.debug(`Request: Rovo Context "${payload.context.jira.boardId}"`);
   if (payload.boardId) {
     return {
       boardId: payload.boardId,
+      context: payload.context,
     };
   }
   if (payload.context.jira.boardId) {
     return {
       boardId: BigInt(payload.context.jira.boardId),
+      context: payload.context,
     };
   }
   return "Could not find a Board Id in the current context";
@@ -40,6 +42,7 @@ export function pickBoard(
 
 export interface RequestBoard {
   boardId: bigint;
+  context?: RovoBoardContext;
 }
 
 export async function fetchBoard(
@@ -109,21 +112,31 @@ export interface BoardResponse {
   location: Location;
 }
 
-export async function listActiveSprintsForBoard(
+function getApiWithAuth(payload: RequestBoard) {
+  console.debug(`Auth for Request: ${JSON.stringify(payload)}`);
+  if (payload.context !== undefined) {
+    console.debug(`Auth for Request: providing asUser()`);
+    return api.asUser();
+  }
+  console.debug(`Auth for Request: providing asApp()`);
+  return api.asApp();
+}
+
+export async function listSprintsInStateForBoard(
   payload: RequestBoard,
+  state: SprintStates,
 ): Promise<SprintResultPage> {
-  console.debug(`Request: Board Id "${payload.boardId}"`);
+  console.debug(`Request: Board Id "${payload.boardId}" for "${state}"`);
   try {
-    const response = await api
-      .asUser()
-      .requestJira(
-        route`/rest/agile/1.0/board/${payload.boardId.toString()}/sprint?state=active`,
-        {
-          headers: {
-            Accept: "application/json",
-          },
+    const apiWithAuth = getApiWithAuth(payload);
+    const response = await apiWithAuth.requestJira(
+      route`/rest/agile/1.0/board/${payload.boardId.toString()}/sprint?state=${state}`,
+      {
+        headers: {
+          Accept: "application/json",
         },
-      );
+      },
+    );
     console.debug(`Response: ${response.status} ${response.statusText}`);
     // console.debug(JSON.stringify(await response.json()));
     if (response.ok) {
@@ -132,7 +145,7 @@ export async function listActiveSprintsForBoard(
       if (responseJson.startAt + responseJson.maxResults < responseJson.total) {
         // TODO: then iterate to get more pages
       }
-      console.debug(`Board Sprints: total=${responseJson.total}`);
+      console.debug(`Board Sprints (${state}): total=${responseJson.total}`);
       return responseJson;
     }
     // TODO: check status codes and throw errors
@@ -147,4 +160,15 @@ export async function listActiveSprintsForBoard(
 export interface SprintResultPage extends PagedResponse {
   // In this API, the fields/expands seem to be fixed.
   values: SprintResponse[];
+}
+
+export async function listActiveSprintsForBoard(
+  payload: RequestBoard,
+): Promise<SprintResultPage> {
+  return await listSprintsInStateForBoard(payload, SprintStates.active);
+}
+export async function listFutureSprintsForBoard(
+  payload: RequestBoard,
+): Promise<SprintResultPage> {
+  return await listSprintsInStateForBoard(payload, SprintStates.future);
 }

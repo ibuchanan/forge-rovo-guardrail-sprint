@@ -1,0 +1,26 @@
+{
+  "maxResults": 50,
+  "startAt": 0,
+  "total": 2,
+  "isLast": true,
+  "values": [
+    {
+      "id": 2,
+      "self": "https://api.atlassian.com/ex/jira/639c4c97-0caf-459b-bc27-da6250725163/rest/agile/1.0/sprint/2",
+      "state": "future",
+      "name": "MOBL Sprint 2",
+      "startDate": "2023-03-11T21:19:00.000Z",
+      "endDate": "2023-04-08T21:19:00.000Z",
+      "originBoardId": 2,
+      "goal": ""
+    },
+    {
+      "id": 5206,
+      "self": "https://api.atlassian.com/ex/jira/639c4c97-0caf-459b-bc27-da6250725163/rest/agile/1.0/sprint/5206",
+      "state": "future",
+      "name": "MOBL Sprint 3",
+      "createdDate": "2025-10-15T16:00:03.792Z",
+      "originBoardId": 2
+    }
+  ]
+}

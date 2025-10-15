@@ -1,7 +1,14 @@
 import api, { route } from "@forge/api";
 import * as jmespath from "jmespath";
 import type { Issue, ParentedCardFields, ParentFields } from "../issue";
+import { myself } from "../myself";
 import type { PagedResponse } from "./api";
+
+export enum SprintStates {
+  future = "future",
+  active = "active",
+  closed = "closed",
+}
 
 export interface RequestSprint {
   sprintId: bigint;
@@ -163,4 +170,57 @@ export type SprintParentIssue = Issue<ParentFields>;
 export interface SprintIssuesResultPage extends PagedResponse {
   // In this API, the fields/expands seem to be fixed.
   issues: SprintMemberIssue[];
+}
+
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+type SprintBody = DeepPartial<SprintResponse>;
+
+export async function updateSprint(
+  payload: RequestSprint,
+  body: SprintBody,
+): Promise<SprintResponse> {
+  console.debug(`Update: Sprint Id "${payload.sprintId}"`);
+  console.debug(`RequestSprint: ${JSON.stringify(payload)}`);
+  console.debug(`SprintBody: ${JSON.stringify(body)}`);
+  const _me = await myself();
+  try {
+    const sprintId = payload.sprintId;
+    const response = await api
+      .asUser()
+      .requestJira(route`/rest/agile/1.0/sprint/${sprintId.toString()}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    console.debug(`Response: ${response.status} ${response.statusText}`);
+    // console.debug(JSON.stringify(await response.json()));
+    if (response.ok) {
+      console.debug(`Success: Sprint Id "${payload.sprintId}"`);
+      const responseJson = (await response.json()) as SprintResponse;
+      console.debug(`Sprint: ${responseJson.id} ${responseJson.self}`);
+      return responseJson;
+    }
+    // TODO: check status codes and throw errors
+    console.error(`Failed: Sprint Id "${payload.sprintId}"`);
+    throw new Error(`Failed for Sprint Id "${payload.sprintId}"\n`);
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Failed for Sprint Id "${payload.sprintId}"\n`);
+  }
+}
+
+export async function startSprint(
+  payload: RequestSprint,
+): Promise<SprintResponse> {
+  return await updateSprint(payload, { state: "active" });
+}
+export async function closeSprint(
+  payload: RequestSprint,
+): Promise<SprintResponse> {
+  return await updateSprint(payload, { state: "closed" });
 }

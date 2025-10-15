@@ -11,8 +11,10 @@ modules:
       description: Assess the quality of a sprint
       actions:
         - get-sprint-details
+        - roll-sprint
       conversationStarters:
         - Assess the quality of this sprint
+        - Roll the current sprint into the next one
       prompt: resource:agent-prompts;agent-instructions.md
   action:
     - key: get-sprint-details
@@ -20,6 +22,17 @@ modules:
       description: Fetch active sprint details for a board including issues and their epics
       actionVerb: GET
       function: fetchActiveSprintDetail
+      inputs:
+        boardId:
+          title: Board Id
+          description: The ID of the target board with an active sprint
+          required: false
+          type: integer
+    - key: roll-sprint
+      name: Roll current sprint
+      description: Close the current active sprint and start the next one
+      actionVerb: UPDATE
+      function: rollSprint
       inputs:
         boardId:
           title: Board Id
@@ -38,6 +51,8 @@ modules:
       response:
         type: dynamic
   function:
+    - key: rollSprint
+      handler: index.rollCurrentToNextSprint
     - key: fetchActiveSprintDetail
       handler: index.fetchBoardSprintContent
     - key: trigger

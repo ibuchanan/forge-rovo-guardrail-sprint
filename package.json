@@ -1,17 +1,26 @@
 {
   "name": "forge-rovo-guardrail-sprint",
   "version": "0.0.0",
-  "description": "a sample app that defines a rovo agent and actions",
-  "main": "index.js",
-  "license": "Apache-2.0",
   "private": true,
+  "description": "a sample app that defines a rovo agent and actions",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "scripts": {
+    "actiontypes": "tsx ./scripts/actiontypes.ts && biome format --write",
+    "build": "tsc",
+    "changelog": "git cliff",
+    "check": "biome check --write",
+    "clean": "rm -rf ./dist",
+    "eval": "promptfoo eval",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "test": "vitest",
+    "view": "promptfoo view"
+  },
   "dependencies": {
     "@forge/api": "^6.0.2",
     "jmespath": "^0.16.0",
     "yaml": "^2.8.0"
-  },
-  "engines": {
-    "node": "22.15.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.2",
@@ -22,16 +31,7 @@
     "typescript": "5",
     "vitest": "3"
   },
-  "scripts": {
-    "check": "biome check --write",
-    "format": "biome format --write",
-    "lint": "biome lint",
-    "changelog": "git cliff",
-    "eval": "promptfoo eval",
-    "view": "promptfoo view",
-    "build": "tsc",
-    "clean": "rm -rf ./dist",
-    "test": "vitest",
-    "actiontypes": "tsx ./scripts/actiontypes.ts && biome format --write"
+  "engines": {
+    "node": "22.18"
   }
 }
