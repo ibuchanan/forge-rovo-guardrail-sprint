@@ -21,11 +21,14 @@ export async function fetchSprint(
   try {
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}`, {
-        headers: {
-          Accept: "application/json",
+      .requestJira(
+        route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
         },
-      });
+      );
     console.debug(`Response: ${response.status} ${response.statusText}`);
     // console.debug(JSON.stringify(await response.json()));
     if (response.ok) {
@@ -117,13 +120,16 @@ export async function moveIssuesToSprint(
     const body = { issues: issues };
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}/issue`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      .requestJira(
+        route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}/issue`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
         },
-        body: JSON.stringify(body),
-      });
+      );
     console.debug(`Response: ${response.status} ${response.statusText}`);
     // console.debug(JSON.stringify(await response.json()));
     if (response.ok) {
@@ -227,19 +233,22 @@ export async function updateSprint(
   try {
     const response = await api
       .asUser()
-      .requestJira(route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      .requestJira(
+        route`/rest/agile/1.0/sprint/${payload.sprintId.toString()}`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
         },
-        body: JSON.stringify(body),
-      });
+      );
     console.debug(`Response: ${response.status} ${response.statusText}`);
     // console.debug(JSON.stringify(await response.json()));
     if (response.ok) {
       console.debug(`Success: Sprint Id "${payload.sprintId}"`);
-      const responseJson = await response.json() as SprintResponse;
+      const responseJson = (await response.json()) as SprintResponse;
       console.debug(`Sprint: ${responseJson.id} ${responseJson.self}`);
       return responseJson;
     }

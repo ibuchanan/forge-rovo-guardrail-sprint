@@ -1,9 +1,4 @@
-import {
-  ArrayedResponse,
-  type ExpandableResponse,
-  type NamedObject,
-  type PagedResponse,
-} from "./api";
+import type { ExpandableResponse, NamedObject, PagedResponse } from "./api";
 
 interface FindProjectsPayload {
   query?: string;
